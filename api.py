@@ -12,16 +12,15 @@ def index():
     return 'Index'
 
 
-@app.route('/add', methods=['POST'])
+@app.route('/task/add', methods=['POST'])
 def add():
     n1 = float(request.form['n1'])
     n2 = float(request.form['n2'])
     result = celery_add.delay(n1, n2)
-    response = jsonify(success=True, uuid=result.id)
-    return response
+    return jsonify(success=True, uuid=result.id)
 
 
-@app.route('/status/<uuid:uuid>', methods=['GET'])
-def status(uuid):
-    result = AsyncResult(uuid)
-    return jsonify(ready=result.ready())
+@app.route('/status/<uuid:id>', methods=['GET'])
+def status(id):
+    result = AsyncResult(id)
+    return jsonify(status=result.status)
