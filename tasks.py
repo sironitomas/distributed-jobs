@@ -4,6 +4,7 @@ import time
 app = Celery()
 app.config_from_object('celeryconfig')
 
+
 @app.task
 def add(x, y):
     # simulate lengthy computational task
