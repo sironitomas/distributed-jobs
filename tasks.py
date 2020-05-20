@@ -20,4 +20,4 @@ def count_system_processes():
     p2 = Popen(['wc', '-l'], stdin=p1.stdout, stdout=PIPE)
     p1.stdout.close()
     process_count = p2.communicate()[0].decode().strip()
-    print('There are {} running processes in the system'.format(process_count))
+    return process_count
